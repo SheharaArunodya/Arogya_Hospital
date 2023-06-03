@@ -1,0 +1,48 @@
+<form action="index.php" method="POST">
+    <button type="submit" name="btn1">Click to add</button>
+    <button type="submit" name="btn2">Click to Update</button>
+    <button type="submit" name="btn3">Click to Delete</button>
+    </form>
+    <?php
+    
+    if(isset($_POST['btn1'])){
+        $sql = "INSERT INTO sample(username,password) VALUES('Example3','4444444');";
+        $state = $newdb->iudcommand($sql,'Insertion');
+        echo $state;
+    }
+    if(isset($_POST['btn2'])){
+        $sql = "UPDATE sample SET username = 'Kasun', password = 'Kasun@123' WHERE username = 'Example1'";
+        $state = $newdb->iudcommand($sql,'Updation');
+        echo $state;
+    }
+    if(isset($_POST['btn3'])){
+        $sql = "DELETE FROM sample WHERE username = 'Example2'";
+        $state = $newdb->iudcommand($sql,'Deletion');
+        echo $state;
+    }
+
+    CREATE TABLE inquiry_assignment(
+	j_id INT PRIMARY KEY AUTO_INCREMENT,
+    i_id INT,
+    s_id INT,
+    
+);
+
+CREATE TABLE inquiry_assignment(
+	j_id INT AUTO_INCREMENT PRIMARY KEY,
+    i_id INT,
+    s_id INT,
+    assigned_date date,
+    FOREIGN KEY (i_id) REFERENCES inquiry(i_id),
+    FOREIGN KEY (s_id) REFERENCES staff(s_id)
+);
+
+CREATE TABLE room_assignment( ra_id INT AUTO_INCREMENT PRIMARY KEY, r_id INT, s_id INT, sheduled_date DATE, sheduled_shift ENUM('day','night'), FOREIGN KEY (r_id) REFERENCES room(r_id), FOREIGN KEY (s_id) REFERENCES staff(s_id) );
+CREATE TABLE theater_shedule( ta_id INT AUTO_INCREMENT PRIMARY KEY,
+                             t_id INT, 
+                             s_id INT,
+                             sheduled_date DATE, 
+                             sheduled_shift ENUM('day','night'), 
+                             FOREIGN KEY (t_id) REFERENCES theater(t_id), 
+                             FOREIGN KEY (s_id) REFERENCES staff(s_id)
+                         	);
